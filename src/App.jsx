@@ -49,16 +49,30 @@ const App = () => {
     }
   }
 
+  const handlePhotoSelect = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const imageURL = URL.createObjectURL(file);
+    // Preview or upload the image
+     setPhotoURL(imageURL)
+    console.log(file);
+  }
+};
+
   return (
-    <div  className='bg-white w-screen h-screen flex flex-col items-center justify-center'>
+    <div  className='bg-white w-screen h-screen flex flex-col items-center justify-center overflow-hidden relative'>
+
+      <label htmlFor="capture" className='bg-black p-8 rounded-4xl absolute bottom-5'/>      
       <input
+        className='hidden'
+        id='capture'
         type="file"
         accept="image/*"
         capture="environment"  // use "user" for front camera
         onChange={(e) => handlePhotoSelect(e)}
       />
       {/* <BeforeCapture  photoURL={photoURL} videoRef={videoRef} handleCapture={handleCapture}/> */}
-      {/* <AfterCapture photoURL={photoURL} setPhotoURL={setPhotoURL}/> */}
+      <AfterCapture photoURL={photoURL} setPhotoURL={setPhotoURL}/>
     </div>
   )
 }
