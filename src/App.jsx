@@ -6,7 +6,6 @@ const App = () => {
   const [lastPhotos,setLastPhotos]=useState([])
   const videoRef = useRef()
   const imageCaptureRef = useRef()
-  const checkRef=useRef()
 
   useEffect(()=>{
     if(!photoURL){
@@ -18,7 +17,9 @@ const App = () => {
 
   
   const startCamera=()=>{
-    navigator.mediaDevices.getUserMedia({video:true})
+    navigator.mediaDevices.getUserMedia({
+       video: { facingMode: 'environment' }
+    })
     .then(gotMedia)
     .catch(error=>console.log("error occured during setting camera",error))
   }
@@ -51,31 +52,21 @@ const App = () => {
   }
 
   const handlePhotoSelect = (event) => {
+    console.log("working")
   const file = event.target.files[0];
   if (file) {
     const imageURL = URL.createObjectURL(file);
     // Preview or upload the image
      setPhotoURL(imageURL)
     console.log(file);
+    checkRef.current.click()
   }
-  checkRef.current.click()
 };
 
 
   return (
-    <div  className='bg-white w-screen h-screen flex flex-col items-center justify-center overflow-hidden relative'>
-
-      <label htmlFor="capture" className='bg-black p-8 rounded-4xl absolute bottom-5'/>  
-      <input
-        ref={checkRef}
-        className='hidden'
-        id='capture'
-        type="file"
-        accept="image/*"
-        capture="environment"  // use "user" for front camera
-        onChange={(e) => handlePhotoSelect(e)}
-      />
-      {/* <BeforeCapture  photoURL={photoURL} videoRef={videoRef} handleCapture={handleCapture}/> */}
+    <div  className='bg-white w-screen h-screen flex flex-col items-center justify-center'>
+      <BeforeCapture  photoURL={photoURL} videoRef={videoRef} handleCapture={handleCapture}/>
       <AfterCapture photoURL={photoURL} setPhotoURL={setPhotoURL}/>
     </div>
   )
