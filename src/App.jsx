@@ -51,8 +51,14 @@ const App = () => {
 
   return (
     <div  className='bg-white w-screen h-screen flex flex-col items-center justify-center'>
-      <BeforeCapture  photoURL={photoURL} videoRef={videoRef} handleCapture={handleCapture}/>
-      <AfterCapture photoURL={photoURL} setPhotoURL={setPhotoURL}/>
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"  // use "user" for front camera
+        onChange={(e) => handlePhotoSelect(e)}
+      />
+      {/* <BeforeCapture  photoURL={photoURL} videoRef={videoRef} handleCapture={handleCapture}/> */}
+      {/* <AfterCapture photoURL={photoURL} setPhotoURL={setPhotoURL}/> */}
     </div>
   )
 }
