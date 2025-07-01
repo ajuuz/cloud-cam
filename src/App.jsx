@@ -6,6 +6,7 @@ const App = () => {
   const [lastPhotos,setLastPhotos]=useState([])
   const videoRef = useRef()
   const imageCaptureRef = useRef()
+  const checkRef=useRef()
 
   useEffect(()=>{
     if(!photoURL){
@@ -57,13 +58,16 @@ const App = () => {
      setPhotoURL(imageURL)
     console.log(file);
   }
+  checkRef.current.click()
 };
+
 
   return (
     <div  className='bg-white w-screen h-screen flex flex-col items-center justify-center overflow-hidden relative'>
 
-      <label htmlFor="capture" className='bg-black p-8 rounded-4xl absolute bottom-5'/>      
+      <label htmlFor="capture" className='bg-black p-8 rounded-4xl absolute bottom-5'/>  
       <input
+        ref={checkRef}
         className='hidden'
         id='capture'
         type="file"
