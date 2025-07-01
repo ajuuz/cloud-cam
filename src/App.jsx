@@ -17,7 +17,7 @@ const App = () => {
 
   
   const startCamera=()=>{
-    navigator.mediaDevices.getUserMedia({video:'environment'})
+    navigator.mediaDevices.getUserMedia({video:true})
     .then(gotMedia)
     .catch(error=>console.log("error occured during setting camera",error))
   }
