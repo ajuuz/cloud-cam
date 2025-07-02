@@ -1,5 +1,3 @@
-import React from 'react'
-
 const BeforeCapture = ({photoURL,videoRef,handleCapture}) => {
   return (
     <div className={`${photoURL?'hidden':'block'} h-full w-full flex flex-col justify-center items-center relative overflow-hidden`}>
